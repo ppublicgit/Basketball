@@ -100,6 +100,8 @@ def get_dataframe(start_date, end_date):
     flattened_games = [j for sub in game_ids for j in sub]
 
 
+def get_
+
 
 def str_(number):
     return "{:02d}".format(number)
