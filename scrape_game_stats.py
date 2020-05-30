@@ -124,6 +124,7 @@ def get_dataframe(start_date, end_date):
                 observations.append(obs[i])
     df = pd.DataFrame(data=observations, columns=columns)
     df.set_index(["game_id", "home_flag"], inplace=True)
+    df.sort_index(inplace=True)
     return df
 
 
@@ -201,4 +202,37 @@ def generate_dates(start_date, end_date):
     return date_range
 
 
+def get_data_inputs_frame(df):
+    columns = ["wl%", "asts", "rebs", "orebs",
+           "tovs", "fga", "fg%", "3pa", "3p%",
+           "fta", "ft%", "pfs", "net_score", "won"]
+    temp_dict = {}
+    for col in columns:
+        temp_dict[col] = []
+    for i in range(0, len(df), 2):
+        away = df.iloc[i]
+        home = df.iloc[i+1]
+        for col in columns:
+            new_val = home[col] - away[col]
+            if col == "net_score":
+                new_val /= 2
+            temp_dict[col].append(new_val)
+
+    return pd.DataFrame(data=temp_dict, columns=columns)
+
+
+def split_learn_df(df, classtype="discrete"):
+    inputs = df.iloc[:, :-2].to_numpy()
+    features = df.columns[:-2]
+    if classtype == "discrete":
+        classes = df.iloc[:, -1].values
+    elif classtype == "continuous":
+        classes = df.iloc[:, -2].values
+    else:
+        raise ValueError("Invalid class type")
+    return inputs, features, classes
+
+
 df = get_dataframe("03-09-2020", "03-09-2020")
+learning_df = get_data_learn_frame(df)
+inputs, features, classes = split_learn_df(learning_df)
