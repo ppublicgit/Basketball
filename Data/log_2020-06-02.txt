@@ -1,0 +1,19 @@
+season: 2016
+bad game id 0021500736
+bad game id 0021500737
+bad game id 0021500744
+bad game id 0021501067
+season: 2017
+season: 2018
+season: 2019
+bad game id 0021801049
+bad game id 0021801050
+bad game id 0021801051
+bad game id 0021801052
+bad game id 0021801053
+bad game id 0021801054
+bad game id 0021801055
+bad game id 0021801056
+bad game id 0021801057
+bad game id 0021801058
+bad game id 0021801059
