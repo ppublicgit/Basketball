@@ -8,9 +8,13 @@ from itertools import chain
 import numpy as np
 
 
+TODAY = str(datetime.date.today())
+
+
 def get_trad_team_stats_url(season):
     url = "https://stats.nba.com/stats/leaguedashteamstats?Conference=&DateFrom=&DateTo=&Division=&GameScope=&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PORound=0&PaceAdjust=N&PerMode=PerGame&Period=0&PlayerExperience=&PlayerPosition=&PlusMinus=N&Rank=N&Season={season}&SeasonSegment=&SeasonType=Regular+Season&ShotClockRange=&StarterBench=&TeamID=0&TwoWay=0&VsConference=&VsDivision=".format(
-        season=season)
+        season=season
+    )
     return url
 
 
@@ -55,14 +59,31 @@ def get_season_data(season):
     ssn = season_response_data["resultSets"][0]["rowSet"]
     rows = []
     for teamIndex in range(len(ssn)):
-        row = [season, ssn[teamIndex][0], int(ssn[teamIndex][3]), int(ssn[teamIndex][4]),
-               float(ssn[teamIndex][5]), int(ssn[teamIndex][19]), int(ssn[teamIndex][18]),
-               int(ssn[teamIndex][16]), int(ssn[teamIndex][20]), int(ssn[teamIndex][8]),
-               float(ssn[teamIndex][9]), None, None, int(ssn[teamIndex][11]),
-               float(ssn[teamIndex][12]), int(ssn[teamIndex][14]), float(ssn[teamIndex][15]),
-               int(ssn[teamIndex][24]), int(ssn[teamIndex][26])]
+        row = [
+            season,
+            ssn[teamIndex][0],
+            int(ssn[teamIndex][3]),
+            int(ssn[teamIndex][4]),
+            float(ssn[teamIndex][5]),
+            int(ssn[teamIndex][19]),
+            int(ssn[teamIndex][18]),
+            int(ssn[teamIndex][16]),
+            int(ssn[teamIndex][20]),
+            int(ssn[teamIndex][8]),
+            float(ssn[teamIndex][9]),
+            None,
+            None,
+            int(ssn[teamIndex][11]),
+            float(ssn[teamIndex][12]),
+            int(ssn[teamIndex][14]),
+            float(ssn[teamIndex][15]),
+            int(ssn[teamIndex][24]),
+            int(ssn[teamIndex][26]),
+        ]
         row[11] = row[9] - row[13]
-        row[12] = round((row[10]*(row[11]+row[13])-row[13]*row[14])/row[11], 3)
+        row[12] = round(
+            (row[10] * (row[11] + row[13]) - row[13] * row[14]) / row[11], 3
+        )
         rows.append(row)
     return rows
 
@@ -74,20 +95,38 @@ def convert_year_to_season(year):
 
 
 def generate_seasons(start, end):
-    return [convert_year_to_season(year) for year in range(start, end+1, 1)]
+    return [convert_year_to_season(year) for year in range(start, end + 1, 1)]
 
 
 def get_team_dataframe(start_season, end_season):
     seasons = generate_seasons(start_season, end_season)
-    columns = ["season", "team_id", "wins", "losses", "wl%", "asts", "rebs", "orebs",
-               "tovs", "fga", "fg%", "2pa", "2p%", "3pa", "3p%", "fta", "ft%", "pfs", "pts"]
+    columns = [
+        "season",
+        "team_id",
+        "wins",
+        "losses",
+        "wl%",
+        "asts",
+        "rebs",
+        "orebs",
+        "tovs",
+        "fga",
+        "fg%",
+        "2pa",
+        "2p%",
+        "3pa",
+        "3p%",
+        "fta",
+        "ft%",
+        "pfs",
+        "pts",
+    ]
     data = []
     for season in seasons:
         season_data = get_season_data(season)
         if season_data is not None:
             for team_data in season_data:
                 data.append(team_data)
-    breakpoint()
     df = pd.DataFrame(data=data, columns=columns)
     df.set_index(["season", "team_id"], inplace=True)
     df.sort_index(inplace=True)
@@ -96,6 +135,8 @@ def get_team_dataframe(start_season, end_season):
 
 if __name__ == "__main__":
     FIRST_SEASON = 2010
-    FINAL_SEASON = 2012
+    FINAL_SEASON = 2020
 
     df = get_team_dataframe(FIRST_SEASON, FINAL_SEASON)
+
+    df.to_csv(f"Data/season_team_info_df_{FIRST_SEASON}_to_{FINAL_SEASON}_{TODAY}.csv")

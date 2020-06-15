@@ -379,7 +379,7 @@ def split_learn_df(df, classtype="discrete"):
 
 
 if __name__ == "__main__":
-    seasons = [*range(2016, 2020, 1)]
+    seasons = [*range(2020, 2021, 1)]
     for season in seasons:
         log(f"season: {season}")
         print(season)
@@ -387,6 +387,8 @@ if __name__ == "__main__":
         if season == 2012:
             start_date = "01-01-2012"  # lockout shortened season
         end_date = "01-04-" + str(season)
+        if season == 2020:
+            end_data = "12-03-" + str(season)  # covid shortened season
         df = get_dataframe(start_date, end_date)
         if df is not None:
             df.to_csv(f"Data/season_game_info_df_{season}_{TODAY}.csv")
