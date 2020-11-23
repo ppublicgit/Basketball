@@ -1,0 +1,35 @@
+Abstract:
+Many factors play into the result of a basketball game. Basketball has many statistics commonly quoted as playing key roles in a game's outcome. Some of these stats are assists, turnovers, rebounds and shooting percentage. This study attempts to develop a machine learning classification algorithm to predict the eventual winner of a game given the known per-game averages of various metrics for the two teams.
+
+Intro:
+Predicting the outcome of a sports match is a dream of gamblers the world over for. Even just a slightly successful model would be immensely profitable for a gambler. With thousands of games a year, a slight statistical advantage would lead a bettor to approach the expected value of their bets and produce consistent gains year to year.
+
+In basketball, the key is to finish the game with the most points. A team can either score points by making a two-point shot, three-point shot or various one-point "free throws". There are many different statistics typically tracked by fans and teams alike to attempt to glean a better understanding of the teams and players and their performances. Several commonly tracked stats are turnovers (losing possession of the ball to other team), assists (a key pass leading to points being scored), rebounds (securing a ball after a missed shot for another possession) and shooting percentages (percentage of shots made). Dean Oliver famously developed his model for determining how a team wins a game, called the "Four Factors of Basketball Success"1. The four factors are shooting, turnovers, rebounding and free throws. The four factors are tracked for both offense and defense so in essence it is really eight factors.
+
+In this paper, a classification algorithm is run on data for NBA (National Basketball Association) seasons from 2010 to 2019 to determine if there is potential for predicting the outcomes of games. Several different classifiers and input feature sets are used on the dataset.
+
+Due to the potential for the size of this problem if extrapolating the data to more seasons, more leagues (college, foreign, gendered) the data would grow into the realm of "Big Data". Big Data is traditionally described as following the 5V model. The five Vs are volume, velocity, variety, veracity and value.
+
+With over 100 leagues across the globe, tens of teams per league, and tens of games per season, there are the potential for millions of games a year. Then, if we use past years for data as well, then there are tens of millions of games to collect data on. Any given day, there can be many games occuring with realtime results for team performances and stats. Each game can have different types of data, from numbers for the stats, to geographic data for game location, date and time data, strings for referee names and more. In the nba, there have several relational datasets with team ids, game ids, referee ids and more being used as keys to relate the different datasets. Since a lot of data is put online for fans to check on scores, there is the potential for incorrect data either by improperly posting data online, improper data collection (different teams may record a different stat for a play such as if an assist occured or not), or corrupted data downloads. It is important to make sure all the data is accurate. Of course, if everything works and a classifier can "beat the house" in Vegas, then there is huge potential for profit.
+
+Methodology:
+The development of a big data solution to predicting basketball games can be broken down into several key steps. The following subsections will discuss the different steps and how they were achieved.
+
+1) Business Case Evaluation
+It is important before tackling such a large task, to determine if there is a business case for the problem. As previously described, there is a clear business case here as a successful classifier would bring in considerable revenue.
+
+2)
+
+Results:
+
+
+Discussion:
+
+
+Conclusion:
+
+
+References:
+https://www.basketball-reference.com/about/factors.html
+
+Appendix:
