@@ -3,3 +3,10 @@
 *#
 **/__pycache__/**
 *test*
+**/Final/**
+*.pdf
+*.loc
+*.out
+*.log
+*.aux
+*.el
