@@ -21,8 +21,8 @@ def get_trad_team_stats_url(season):
 def get_team_request_header(requestType):
     headers = {
         "Host": "stats.nba.com",
-        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:76.0) Gecko/20100101 Firefox/76.0",
-        "Accept": "application/json, text/plain, */*",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
         "Accept-Language": "en-US,en;q=0.5",
         "Accept-Encoding": "gzip, deflate, br",
         "x-nba-stats-origin": "stats",
@@ -30,9 +30,11 @@ def get_team_request_header(requestType):
         "DNT": "1",
         "Connection": "keep-alive",
         "Referer": "https://stats.nba.com/scores/03/10/2020",
+        "Sec-GPC": "1",
+        "Upgrade-Insecure-Requests": "1"
     }
     if requestType == "trad":
-        referer = "https://stats.nba.com/teams/traditional/"
+        referer = "https://stats.nba.com/"
     elif requestType == "adv":
         referer = ""
     headers["Referer"] = referer
