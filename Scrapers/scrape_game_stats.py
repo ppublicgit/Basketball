@@ -173,19 +173,14 @@ def get_game_ids(date_range):
     start_id = get_game_id_bounds(0, "forward")
     end_id = get_game_id_bounds(len(date_range)-1, "backward")
     if start_id is None and end_id is None:
-        breakpoint()
         return None
     elif start_id is None:
-        breakpoint()
         return end_id
     elif end_id is None:
-        breakpoint()
         return start_id
     elif start_id == end_id and isinstance(start_id, str):
-        breakpoint()
         return [start_id]
     elif start_id == end_id:
-        breakpoint()
         return start_id
     else:
         return create_game_ids_list(start_id, end_id)
@@ -392,6 +387,3 @@ if __name__ == "__main__":
         df = get_dataframe(start_date, end_date)
         if df is not None:
             df.to_csv(f"Data/season_game_info_df_{season}_{TODAY}.csv")
-
-    # learning_df = get_data_learn_frame(df)
-    # inputs, features, classes = split_learn_df(learning_df)
