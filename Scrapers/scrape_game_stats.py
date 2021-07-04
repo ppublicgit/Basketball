@@ -91,9 +91,9 @@ def get_response(requestType, *args):
     headers = get_request_header(requestType, *args)
     try:
         response = requests.get(url, headers=headers, timeout=30)
-    except:
+    except e:
+        print(e)
         return BadResponse()
-    sleep(15)
     return response
 
 
